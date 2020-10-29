@@ -41,6 +41,14 @@ public class AccountController {
             return "Account registered";
         } else return "Already registered";
     }
+    @PostMapping("/update")
+    public String updateAccount(Account a) {
+        val accountOptional = (accountRepo.findById(a.getId_account()));
+        if (accountOptional.isPresent()) {
+            accountRepo.update(a.getId_account(), a.getEmail(), a.getNickname(), a.getFullName(), a.getPassword(), a.getRole());
+            return "Updated";
+        } else return "There is no element with that id";
+    }
 
 
 
