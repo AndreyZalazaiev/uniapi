@@ -41,13 +41,13 @@ public class QuestionController {
     public String updateQuestion(Question q) {
         val questionOptional = (questionRepo.findById(q.getId_question()));
         if (questionOptional.isPresent()) {
-            questionRepo.update(q.getId_question(),q.getId_level(),q.getText(),q.getName());//image убран
+            questionRepo.update(q.getId_question(), q.getId_level(), q.getText(), q.getName());//image убран
             return "Updated";
         } else return "There is no element with that id";
     }
+
     @GetMapping("/parse")
-    public Iterable<Question> getAllQuestionsByIdLevel(@RequestParam Integer id_level)
-    {
+    public Iterable<Question> getAllQuestionsByIdLevel(@RequestParam Integer id_level) {
         return questionRepo.allQuestionsByIdLevel(id_level);
     }
 
