@@ -45,35 +45,5 @@ public class MailSender {
         }
 
     }
-
-
-    //заготовка для письма с html
-    class asyncSendHtmlMessage implements Runnable {
-        MimeMessage mm;
-
-        public asyncSendHtmlMessage(MimeMessage msg) {
-
-            this.mm = msg;
-        }
-
-        public void run() {
-            mailSender.send(mm);
-        }
-
-    }
-    public void sendEmailWithHtml(final String to, final String subject, final String text) {
-        try {
-            MimeMessage msg = mailSender.createMimeMessage();
-
-            MimeMessageHelper helper = new MimeMessageHelper(msg, true);
-            msg.setContent(text, "text/html; charset=UTF-8");
-            msg.setText("");//сюда подгони html
-            helper.setTo(to);
-            helper.setSubject(subject);
-
-            new Thread(new asyncSendHtmlMessage(msg)).start();
-        } catch (MessagingException e) {
-            e.printStackTrace();
-        }
-    }
+    
 }
